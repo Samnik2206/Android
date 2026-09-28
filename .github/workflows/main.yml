@@ -16,11 +16,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
-          cache: gradle
 
       - name: Decode release keystore
         env:
@@ -28,7 +27,7 @@ jobs:
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/speakly-release.jks
 
-      - name: Create keystore.properties
+      - name: Create keystore properties
         env:
           STORE_PASSWORD: ${{ secrets.PLAY_RELEASE_STORE_PASSWORD }}
         run: |
